@@ -15,7 +15,7 @@ let
     inherit (cfg) apparmor;
     dbus = cfg.dbusPackage;
     suidHelper = "${config.security.wrapperDir}/dbus-daemon-launch-helper";
-    serviceDirectories = cfg.packages;
+    serviceDirectories = lib.unique cfg.packages;
   };
 
   inherit (lib)
@@ -147,8 +147,8 @@ in
 
       services.dbus.packages = [
         cfg.dbusPackage
-        config.system.path
-      ];
+      ] ++
+        config.environment.systemPackages;
 
       systemd.user.sockets.dbus.wantedBy = [
         "sockets.target"
