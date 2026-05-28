@@ -10846,6 +10846,8 @@ with pkgs;
 
   freeciv_gtk = freeciv;
 
+  outfly-libre = outfly.override { unfreeAssets = false;};
+
   # used as base package for iortcw forks
   iortcw_sp = callPackage ../by-name/io/iortcw/sp.nix { };
 
